@@ -38,16 +38,16 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       }
       // Set params
       parent.append('display: flex;');
-      if (maxWidth.length > 1) {
+      if (maxWidth.length > 0) {
         parent.append('width: 100%; max-width: ' + maxWidth + ';');
       }
-      if (direction.length > 1) {
+      if (direction.length > 0) {
         parent.append('flex-direction: ' + direction + ';');
       }
-      if (align.length > 1) {
+      if (align.length > 0) {
         parent.append('align-items: ' + align + ';');
       }
-      if (justify.length > 1) {
+      if (justify.length > 0) {
         parent.append('justify-content: ' + justify + ';');
       }
       // Remove old elements
@@ -78,13 +78,13 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
         }
       }
       // Set params
-      if (maxWidth.length > 1) {
+      if (maxWidth.length > 0) {
         parent.append('width: 100%; max-width: ' + maxWidth + ';');
       }
-      if (flex.length > 1) {
+      if (flex.length > 0) {
         parent.append('flex: ' + flex + ';');
       }
-      if (align.length > 1) {
+      if (align.length > 0) {
         parent.append('align-self: ' + align + ';');
       }
       // Remove old elements
