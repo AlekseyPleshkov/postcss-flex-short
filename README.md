@@ -37,6 +37,7 @@ div {
 p { 
   width: 100%; 
   max-width: 400px; 
+  flex: 1;
   align-self: flex-start; 
 }
 ```
