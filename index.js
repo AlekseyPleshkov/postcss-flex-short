@@ -35,6 +35,10 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
         else if (value.search('justify-') === 0) {
           justify = value.replace('justify-', '');
         }
+        // Wrap
+        else if (value.search('wrap-') === 0) {
+          wrap = value.replace('wrap-', '');
+        }
       }
       // Set params
       parent.append('display: flex;');
@@ -49,6 +53,9 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       }
       if (justify.length > 0) {
         parent.append('justify-content: ' + justify + ';');
+      }
+      if (wrap.length > 0) {
+        parent.append('flex-wrap: ' + wrap + ';');
       }
       // Remove old elements
       decl.remove();

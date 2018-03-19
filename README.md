@@ -14,7 +14,7 @@ npm install postcss-flex-short --save
 
 ```css
 div { 
-  flex-container: width-1200px direction-row align-center justify-stretch; 
+  flex-container: width-1200px direction-row align-center justify-stretch wrap-nowrap; 
 } 
 
 p { 
@@ -31,7 +31,8 @@ div {
   max-width: 1200px; 
   flex-direction: row; 
   align-items: center; 
-  justify-content: stretch; 
+  justify-content: stretch;
+  flex-wrap: nowrap;
 } 
 
 p { 
