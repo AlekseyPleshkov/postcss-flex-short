@@ -18,7 +18,7 @@ div {
 } 
 
 p { 
-  flex-column: width-400px flex-1 align-flex-start; 
+  flex-column: width-400px flex-1 align-flex-start justify-stretch; 
 }
 ```
 
@@ -40,5 +40,6 @@ p {
   max-width: 400px; 
   flex: 1;
   align-self: flex-start; 
+  justify-self: stretch;
 }
 ```

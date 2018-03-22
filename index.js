@@ -68,6 +68,7 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       var maxWidth = '';
       var flex = '';
       var align = '';
+      var justify = '';
       // Parse params
       for (var i = 0; i < params.length; i++) {
         var value = params[i].toLowerCase();
@@ -83,6 +84,10 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
         else if (value.search('align-') === 0) {
           align = value.replace('align-', '');
         }
+        // Justify self
+        else if (value.search('justify-') === 0) {
+          justify = value.replace('justify-', '');
+        }
       }
       // Set params
       if (maxWidth.length > 0) {
@@ -93,6 +98,9 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       }
       if (align.length > 0) {
         parent.append('align-self: ' + align + ';');
+      }
+      if (justify.length > 0) {
+        parent.append('justify-self: ' + justify + ';');
       }
       // Remove old elements
       decl.remove();
