@@ -1,6 +1,6 @@
 {
   "name": "postcss-flex-short",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "PostCSS plugin for write short flex parameters",
   "main": "index.js",
   "scripts": {
