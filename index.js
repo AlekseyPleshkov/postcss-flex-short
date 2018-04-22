@@ -66,7 +66,9 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       // Params default
       var parent = decl.parent;
       var maxWidth = '';
-      var flex = '';
+      var basis = '';
+      var grow = '';
+      var shrink = '';
       var align = '';
       var justify = '';
       // Parse params
@@ -76,9 +78,17 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
         if (value.search('width-') === 0) {
           maxWidth = value.replace('width-', '');
         } 
-        // Flex
-        else if (value.search('flex-') === 0) {
-          flex = value.replace('flex-', '');
+        // Basis
+        else if (value.search('basis-') === 0) {
+          basis = value.replace('basis-', '');
+        }
+        // Grow
+        else if (value.search('grow-') === 0) {
+          grow = value.replace('grow-', '');
+        }
+        // Shrink
+        else if (value.search('shrink-') === 0) {
+          shrink = value.replace('shrink-', '');
         }
         // Align self
         else if (value.search('align-') === 0) {
@@ -93,8 +103,14 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       if (maxWidth.length > 0) {
         parent.append('width: 100%; max-width: ' + maxWidth + ';');
       }
-      if (flex.length > 0) {
-        parent.append('flex: ' + flex + ';');
+      if (basis.length > 0) {
+        parent.append('flex-basis: ' + basis + ';');
+      }
+      if (grow.length > 0) {
+        parent.append('flex-grow: ' + grow + ';');
+      }
+      if (shrink.length > 0) {
+        parent.append('flex-shrink: ' + shrink + ';');
       }
       if (align.length > 0) {
         parent.append('align-self: ' + align + ';');
