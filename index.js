@@ -66,6 +66,7 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       // Params default
       var parent = decl.parent;
       var maxWidth = '';
+      var flex = '';
       var basis = '';
       var grow = '';
       var shrink = '';
@@ -78,6 +79,11 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
         if (value.search('width-') === 0) {
           maxWidth = value.replace('width-', '');
         } 
+        // Flex
+        else if (value.search('flex-') === 0) {
+          flex = value.replace('flex-', '');
+          flex = flex.split('-');
+        }
         // Basis
         else if (value.search('basis-') === 0) {
           basis = value.replace('basis-', '');
@@ -102,6 +108,10 @@ module.exports = postcss.plugin('postcss-flex-short', function (options) {
       // Set params
       if (maxWidth.length > 0) {
         parent.append('width: 100%; max-width: ' + maxWidth + ';');
+      }
+      if (flex.length > 0) {
+        let flexJoin = flex.join(' ');
+        parent.append('flex: ' + flexJoin + ';');
       }
       if (basis.length > 0) {
         parent.append('flex-basis: ' + basis + ';');
