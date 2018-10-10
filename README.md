@@ -5,7 +5,7 @@ PostCSS plugin for write short flex parameters
 ## Install
 
 ```
-npm install postcss-flex-short --save
+yarn add postcss-flex-short --save
 ```
 
 ## Example
@@ -14,11 +14,11 @@ npm install postcss-flex-short --save
 
 ```css
 div { 
-  flex-container: width-1200px direction-row align-center justify-stretch wrap-nowrap; 
+  flex-container: width 1200px, direction row, align center, justify stretch, wrap nowrap; 
 } 
 
 p { 
-  flex-column: width-400px flex-1-0-0 basis-400px grow-0 shrink-1 align-flex-start justify-stretch; 
+  flex-column: width 400px, flex 1 0 0, basis 400px, grow 0, shrink 1, align flex-start, justify stretch; 
 }
 ```
 

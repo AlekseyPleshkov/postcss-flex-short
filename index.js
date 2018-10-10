@@ -1,147 +1,163 @@
-'use strict';
+'use strict'
 
-// flex-container: width-1200px direction-row align-center justify-stretch;
+// flex-container: width-1200px direction-row align-center justify-stretch
 // flex-column: width-400px flex-1 align-flex-start
 
-var postcss = require('postcss');
-module.exports = postcss.plugin('postcss-flex-short', function (options) {
-  return function (css) {
-    
+const postcss = require('postcss')
+
+module.exports = postcss.plugin('postcss-flex-short', (options) => {
+  return (css) => {
+
     // Flex container
-    var flexContainer = function(decl, params) {
+    const flexContainer = (decl, params) => {
+      const parseParams = params.join(' ').split(', ')
+
       // Params default
-      var parent = decl.parent;
-      var maxWidth = '';
-      var direction = '';
-      var align = '';
-      var justify = '';
-      var wrap = '';
+      const parent = decl.parent
+      const styleOptions = {
+        maxWidth: '',
+        direction: '',
+        align: '',
+        justify: '',
+        wrap: ''
+      }
+
       // Parse params
-      for (var i = 0; i < params.length; i++) {
-        var value = params[i].toLowerCase();
+      parseParams.forEach(param => {
+        const singleParam = param.toLowerCase()
+
         // Max width
-        if (value.search('width-') === 0) {
-          maxWidth = value.replace('width-', '');
-        } 
+        if (singleParam.search('width ') === 0) {
+          styleOptions.maxWidth = singleParam.replace('width ', '')
+        }
         // Flex direction
-        else if (value.search('direction-') === 0) {
-          direction = value.replace('direction-', '');
+        else if (singleParam.search('direction ') === 0) {
+          styleOptions.direction = singleParam.replace('direction ', '')
         }
         // Align items
-        else if (value.search('align-') === 0) {
-          align = value.replace('align-', '');
+        else if (singleParam.search('align ') === 0) {
+          styleOptions.align = singleParam.replace('align ', '')
         }
         // Justify content
-        else if (value.search('justify-') === 0) {
-          justify = value.replace('justify-', '');
+        else if (singleParam.search('justify ') === 0) {
+          styleOptions.justify = singleParam.replace('justify ', '')
         }
         // Wrap
-        else if (value.search('wrap-') === 0) {
-          wrap = value.replace('wrap-', '');
+        else if (singleParam.search('wrap ') === 0) {
+          styleOptions.wrap = singleParam.replace('wrap ', '')
         }
-      }
+      })
+
       // Set params
-      parent.append('display: flex;');
-      if (maxWidth.length > 0) {
-        parent.append('width: 100%; max-width: ' + maxWidth + ';');
+      parent.append('display: flex;')
+
+      if (styleOptions.maxWidth.length > 0) {
+        parent.append('width: 100%; max-width: ' + styleOptions.maxWidth + ';')
       }
-      if (direction.length > 0) {
-        parent.append('flex-direction: ' + direction + ';');
+      if (styleOptions.direction.length > 0) {
+        parent.append('flex-direction: ' + styleOptions.direction + ';')
       }
-      if (align.length > 0) {
-        parent.append('align-items: ' + align + ';');
+      if (styleOptions.align.length > 0) {
+        parent.append('align-items: ' + styleOptions.align + ';')
       }
-      if (justify.length > 0) {
-        parent.append('justify-content: ' + justify + ';');
+      if (styleOptions.justify.length > 0) {
+        parent.append('justify-content: ' + styleOptions.justify + ';')
       }
-      if (wrap.length > 0) {
-        parent.append('flex-wrap: ' + wrap + ';');
+      if (styleOptions.wrap.length > 0) {
+        parent.append('flex-wrap: ' + styleOptions.wrap + ';')
       }
+
       // Remove old elements
-      decl.remove();
-    };
+      decl.remove()
+    }
 
     // Flex column
-    var flexColumn = function(decl, params) {
+    const flexColumn = function (decl, params) {
+      const parseParams = params.join(' ').split(', ')
+
       // Params default
-      var parent = decl.parent;
-      var maxWidth = '';
-      var flex = '';
-      var basis = '';
-      var grow = '';
-      var shrink = '';
-      var align = '';
-      var justify = '';
+      const parent = decl.parent
+      const styleOptions = {
+        maxWidth: '',
+        flex: '',
+        basis: '',
+        grow: '',
+        shrink: '',
+        align: '',
+        justify: ''
+      }
+
       // Parse params
-      for (var i = 0; i < params.length; i++) {
-        var value = params[i].toLowerCase();
+      parseParams.forEach(param => {
+        const singleParam = param.toLowerCase()
+
         // Max width
-        if (value.search('width-') === 0) {
-          maxWidth = value.replace('width-', '');
-        } 
+        if (singleParam.search('width ') === 0) {
+          styleOptions.maxWidth = singleParam.replace('width ', '')
+        }
         // Flex
-        else if (value.search('flex-') === 0) {
-          flex = value.replace('flex-', '');
-          flex = flex.split('-');
+        else if (singleParam.search('flex ') === 0) {
+          styleOptions.flex = singleParam.replace('flex ', '')
         }
         // Basis
-        else if (value.search('basis-') === 0) {
-          basis = value.replace('basis-', '');
+        else if (singleParam.search('basis ') === 0) {
+          styleOptions.basis = singleParam.replace('basis ', '')
         }
         // Grow
-        else if (value.search('grow-') === 0) {
-          grow = value.replace('grow-', '');
+        else if (singleParam.search('grow ') === 0) {
+          styleOptions.grow = singleParam.replace('grow ', '')
         }
         // Shrink
-        else if (value.search('shrink-') === 0) {
-          shrink = value.replace('shrink-', '');
+        else if (singleParam.search('shrink ') === 0) {
+          styleOptions.shrink = singleParam.replace('shrink ', '')
         }
         // Align self
-        else if (value.search('align-') === 0) {
-          align = value.replace('align-', '');
+        else if (singleParam.search('align ') === 0) {
+          styleOptions.align = singleParam.replace('align ', '')
         }
         // Justify self
-        else if (value.search('justify-') === 0) {
-          justify = value.replace('justify-', '');
+        else if (singleParam.search('justify ') === 0) {
+          styleOptions.justify = singleParam.replace('justify ', '')
         }
-      }
+      })
+
       // Set params
-      if (maxWidth.length > 0) {
-        parent.append('width: 100%; max-width: ' + maxWidth + ';');
+      if (styleOptions.maxWidth.length > 0) {
+        parent.append('width: 100%; max-width: ' + styleOptions.maxWidth + ';')
       }
-      if (flex.length > 0) {
-        let flexJoin = flex.join(' ');
-        parent.append('flex: ' + flexJoin + ';');
+      if (styleOptions.flex.length > 0) {
+        parent.append('flex: ' + styleOptions.flex + ';')
       }
-      if (basis.length > 0) {
-        parent.append('flex-basis: ' + basis + ';');
+      if (styleOptions.basis.length > 0) {
+        parent.append('flex-basis: ' + styleOptions.basis + ';')
       }
-      if (grow.length > 0) {
-        parent.append('flex-grow: ' + grow + ';');
+      if (styleOptions.grow.length > 0) {
+        parent.append('flex-grow: ' + styleOptions.grow + ';')
       }
-      if (shrink.length > 0) {
-        parent.append('flex-shrink: ' + shrink + ';');
+      if (styleOptions.shrink.length > 0) {
+        parent.append('flex-shrink: ' + styleOptions.shrink + ';')
       }
-      if (align.length > 0) {
-        parent.append('align-self: ' + align + ';');
+      if (styleOptions.align.length > 0) {
+        parent.append('align-self: ' + styleOptions.align + ';')
       }
-      if (justify.length > 0) {
-        parent.append('justify-self: ' + justify + ';');
+      if (styleOptions.justify.length > 0) {
+        parent.append('justify-self: ' + styleOptions.justify + ';')
       }
+
       // Remove old elements
-      decl.remove();
-    };
+      decl.remove()
+    }
 
     // Search tag flex container
-    css.walkDecls('flex-container', function(decl) {
-      var params = postcss.list.space(decl.value);
-      flexContainer(decl, params);
-    });
+    css.walkDecls('flex-container', function (decl) {
+      const params = postcss.list.space(decl.value)
+      flexContainer(decl, params)
+    })
 
     // Search tag flex column
-    css.walkDecls('flex-column', function(decl) {
-      var params = postcss.list.space(decl.value);
-      flexColumn(decl, params);
-    });
-  };
-});
+    css.walkDecls('flex-column', function (decl) {
+      const params = postcss.list.space(decl.value)
+      flexColumn(decl, params)
+    })
+  }
+})

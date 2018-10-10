@@ -1,6 +1,6 @@
 {
   "name": "postcss-flex-short",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "PostCSS plugin for write short flex parameters",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,14 @@
     "css",
     "postcss",
     "postcss-plugin",
-    "size",
-    "sizes"
+    "flexbox",
+    "flex",
+    "grid",
+    "postcss-flex"
   ],
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.14.0"
+    "ava": "^0.25.0"
   },
   "homepage": "https://github.com/AlekseyPleshkov/postcss-flex-short",
   "author": {
@@ -25,6 +27,6 @@
   },
   "repository": "AlekseyPleshkov/postcss-flex-short",
   "dependencies": {
-    "postcss": "^5.0.19"
+    "postcss": "^7.0.5"
   }
 }
